@@ -1,0 +1,22 @@
+{
+  "name": "wwcore",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "async": "*",
+    "aws-lib": "*",
+    "aws-sdk": "*",
+    "connect-multiparty": "*",
+    "errorhandler": "*",
+    "markdown": "*",
+    "mkdirp": "*",
+    "mongoose": "*",
+    "njax": "0.2.0",
+    "socket.io": "*",
+    "socket.io-redis": "^0.1.4",
+    "underscore": "*"
+  }
+}

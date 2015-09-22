@@ -1,0 +1,26 @@
+{
+  "name": "nde",
+  "version": "1.0.0",
+  "main": "path/to/main.css",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "angular": "*",
+    "underscore": "*",
+    "async": "*",
+    "bootstrap": "*",
+    "font-awesome": "*",
+    "angular-route": "*",
+    "angular-cookies": "*",
+    "angular-resource": "*",
+    "angular-strap": "*",
+    "angular-load": "*",
+    "angular-sanitize": "*",
+    "ng-table": "~0.8.3",
+    "angular-socket-io": "~0.7.0",
+    "angular-ui-router": "~0.2.15"
+  }
+}
