@@ -2,28 +2,7 @@
 
 
 
-NJax.Builder.extend(
-	'Account',
-	['nAccount', '$q', '$http', 'NJaxSocket', 'NJaxBootstrap', function(nAccount, $q, $http, NJaxSocket, NJaxBootstrap) {
-			/** Static function **/
-			nAccount.namespace_available = function (namespace) {
-				var deferred = $q.defer();
-				nAccount.$query({namespace:namespace}).then(function(data){
-					if(data.response.length == 0){
-						return deferred.resolve();
-					}
-					return deferred.reject(new Error("There is already an account with this namespace"));
-				})
-				return deferred.promise;
-			}
-			nAccount.register = function (data) {
-				var deferred = $q.defer();
-				return $http.post(NJaxBootstrap.core_api_url + '/register', data);
-			}
-			return nAccount;
-		}
-	]
-)
+
 
 // Declare app level module which depends on filters, and services
 var cfcore = angular.module(

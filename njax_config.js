@@ -30,7 +30,6 @@ module.exports = function () {
 						"ref": "account",
 						"bootstrap_populate": "req.user"
 					},
-					"coords": "latlng",
 					"archiveDate": "date"
 				}
 			},
@@ -46,7 +45,6 @@ module.exports = function () {
 						"ref": "title",
 						"bootstrap_populate": "req.title"
 					},
-					"coords": "latlng",
 					"archiveDate": "date"
 				}
 
