@@ -30,6 +30,7 @@ module.exports = function () {
 						"ref": "account",
 						"bootstrap_populate": "req.user"
 					},
+					"chapterCount":"number",
 					"archiveDate": "date"
 				}
 			},
@@ -40,11 +41,13 @@ module.exports = function () {
 					"namespace": "namespace",
 					"name": "string",
 					"desc": "md",
+					"chapterNum":"number",
 					"title": {
 						"type": "ref",
 						"ref": "title",
 						"bootstrap_populate": "req.title"
 					},
+					"dueDate":"date",
 					"archiveDate": "date"
 				}
 

@@ -58,10 +58,103 @@ cfcore.config(
 
 
 }])
-.controller('TestCtl',['$scope', 'Title', function($scope, Title){
-		Title.$query().then(function(data){
-			console.log("Query Success: ", data)
-			$scope.titles = data.response;
+.controller('HomeCtl',['$scope', '$q', 'Title', 'Chapter', function($scope, $q, Title, Chapter){
+		$scope.title = new Title({
+			chapterCount:6
+		});
+		$scope.step = 0;
+		$scope.titleName_action = 'Next';
 
+
+		$scope.titleDesc_action = "Next"
+		$scope.titleChapterCount_action = "Next";
+		$scope.chapterCountOpts = [];
+		for(var i = 0; i < 24; i++){
+			$scope.chapterCountOpts.push(i)
+		}
+		$scope.next = function(curr_step){
+			if(!$scope.title.name || $scope.title.name.length < 2){
+				//Display an error for this
+				$scope.titleNameError = 'Need a longer title for your book buddy';
+				return;
+			}
+			$scope.titleNameError = null;
+			$scope.step = 1;
+			if(curr_step <= $scope.step){
+				return;
+			}
+			//Just letting it go for now
+
+
+			if(!$scope.title.desc || $scope.title.desc.length == 0){
+				$scope.titleDescError = 'Common tell us a little something';
+				return;
+			}
+			$scope.titleDescError = null;
+			$scope.step = 2;
+
+			if(!$scope.title.chapterCount || $scope.title.chapterCount == 0){
+				$scope.titleChapterCountError = 'You should probably write at least one';
+				return;
+			}
+			$scope.titleDescError = null;
+			$scope.step = curr_step;
+
+
+
+			$scope.updateChapters();
+
+		}
+		$scope.onRegisterFinish = function(user){
+			console.log(user);
+			$scope.title.owner = user._id;
+			$scope.title.$save().then(function(){
+
+				console.log("Saved Title");
+				var promisses = [];
+				for(var i in $scope.chapters){
+					$scope.chapters[i].title = $scope.title._id;
+					promisses.push($scope.chapters[i].$save());
+
+				}
+				$q.all(promisses).then(function(){
+
+					$scope.step = 5;
+					console.log("Send them to the detail screen and prompt to invite");
+				})
+			})
+
+
+		}
+		$scope.updateChapters = function(){
+			$scope.chapters = [];
+			var startDate = new Date();
+			var startMonth = startDate.getMonth();
+			var startYear = startDate.getFullYear();
+			for(var i = 1; i <= $scope.title.chapterCount; i++){
+				var dueDate = new Date();
+				var newMonth = startMonth + i;
+				var newYear = startYear + Math.floor(newMonth / 12);
+				newMonth -= newYear * 12;
+
+
+				dueDate.setMonth(newMonth);
+				dueDate.setYear(newYear);
+
+
+
+				$scope.chapters.push(new Chapter({
+					chapterNum: i,
+					name:"Chapter " + i,
+					notes:"",
+					dueDate:dueDate
+				}));
+
+			}
+		}
+		$scope.$watch('title.chapterCount', function(){
+			$scope.updateChapters();
 		})
+		$scope.updateChapters();
+
 }]);

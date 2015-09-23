@@ -1,12 +1,121 @@
 <div>
-    <div  ng-controller="TestCtl">
-        <h1>It works...</h1>
+    <div  ng-controller="HomeCtl">
+        <h1>The Chapter Factory</h1>
+        <h4 style="font-style: italic">How do you write a book? One chapter at a time</h4>
+
         <div class="row">
             <div class="col-lg-6">
-                <title-edit-form title="title" />
+                <div class="row">
+                    <div class="col-md-12">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Kznek1uNVsg" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Start writing your great work today</p>
+                    </div>
+                    <form role="form">
+
+                        <div class="form-group " ng-class="{ 'has-error': titleNameError }">
+                            <label class="control-label" ng-bind="titleNameError || 'What is the name of your book?'" for="title_name"></label>
+                            <div ng-class="{'input-group': step ==0 }">
+                                <input id="title_name" class="form-control" type="text" placeholder="My Amazing Book" ng-model="title.name" >
+                                <span class="input-group-btn" ng-show="step == 0">
+                                    <button class="btn btn-default" type="button" ng-bind="titleName_action" ng-click="next(1)"></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div  ng-show="step >= 1">
+                            <div class="form-group"  ng-class="{ 'has-error': titleDescError }">
+                                <label class="control-label" ng-bind="titleDescError || 'Tell us about your book'" for="title_name"></label>
+                                <textarea class="form-control" rows="3" ng-model="title.desc"></textarea >
+
+
+
+                            </div>
+                            <button class="btn btn-default btn-block" type="button" ng-bind="titleDesc_action" ng-click="next(2)" ng-show="step == 1"></button>
+                        </div>
+                        <div  ng-show="step >= 2">
+                            <div class="form-group">
+                                <label  ng-bind="titleChapterLengthError || 'How many chapters do you think your book will be?'"></label>
+                                <div ng-class="{'input-group': step ==2 }">
+                                    <select class="form-control"  ng-options="option for option in chapterCountOpts" ng-model="title.chapterCount" >
+
+                                    </select>
+                                    <span class="input-group-btn" ng-show="step == 2">
+                                    <button class="btn btn-default" type="button" ng-bind="titleChapterCount_action" ng-click="next(3)"></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div ng-show="step >= 3">
+                                <h3>Schedule</h3>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p>
+                                            How does this schedule look?
+                                        </p>
+                                        <button class="btn btn-default btn-block" type="button"  ng-click="next(4)">Looks good to me</button>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="panel panel-default" ng-repeat="chapter in chapters">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon" id="basic-addon1">
+                                                                 <i class="fa fa-bookmark-o"></i>
+                                                            </span>
+
+                                                            <input type="text" class="form-control" ng-model="chapter.name" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                       <i class="fa  fa-clock-o"></i>  {{chapter.dueDate | date:'MM/dd/yyyy'}}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div  ng-show="step >= 4">
+                            <div class="row">
+                                <div class="col-md-offset-1 col-md-8 col-sm-12">
+                                    <h3>Your Info</h3>
+                                    <div ng-show="step == 4">
+                                        <njax-register-form on-register-finish="onRegisterFinish(user)"></njax-register-form>
+                                    </div>
+                                    <div ng-show="step > 4">
+                                        <div class="alert alert-success">
+                                            Great work!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div  ng-show="step >= 5">
+                            <h3>Assemble your supporters!</h3>
+                            <p>
+                                //TODO: Facebook, Twitter, Email, Etc
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+                    </form>
+                </div>
             </div>
             <div class="col-lg-6">
-                <title-list collection="title" />
+                <h2>Existing Titles</h2>
+                <!--<title-list collection="titles" />-->
             </div>
         </div>
     </div>
