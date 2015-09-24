@@ -96,28 +96,34 @@ cfcore.config(
 					scope.getChapterClass = function(chapter){
 						var now = new Date();
 						if(chapter.dueDate > now){
-							//Has been written
-							return 'fa-check';
+							if(!chapter.startedDate){
+								//Has not been written
+								return 'fa-calendar-minus-o';
+							}else if(!chapter.publishedDate) {
 
-							//Has been started
-							return 'fa-pencil';
+								//Has been started
+								return 'fa-pencil';
+							}else{
+								//Has been written
+								return 'fa-check';
+							}
 
-							//Has not been written
-							return 'fa-calendar-minus-o';
 
 						}else{
-							//Has been written
-							return 'fa-check';
+							if(!chapter.startedDate){
+								//Has not been written
+								return 'fa-times';
 
-							//has not been started
-							return 'fa-bel';
+							}else if(!chapter.publishedDate) {
 
-							//Has not been written
-
-							return 'fa-times';
+								//Has been written
+								return 'fa-check';
+							}else {
+								//has not been started
+								return 'fa-bel';
+							}
 
 						}
-
 
 					}
 

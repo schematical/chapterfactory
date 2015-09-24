@@ -45,6 +45,8 @@ module.exports = function () {
 					"chapterNum":"number",
 					"content":"md",
 					"content_html":"string",
+					"startedDate":"date",
+					"publishedDate":"date",
 					"title": {
 						"type": "ref",
 						"ref": "title",
