@@ -92,41 +92,60 @@ cfcore.config(
 					Chapter.$query({ title: scope.title._id }).then(function(data){
 
 						scope.chapters = data.response;
+						for(var i in scope.chapters){
+							scope.chapters[i].timeline = scope.getChapterClass(scope.chapters[i])
+						}
 					});
 					scope.getChapterClass = function(chapter){
 						var now = new Date();
 						if(chapter.dueDate > now){
 							if(!chapter.startedDate){
 								//Has not been written
-								return 'fa-calendar-minus-o';
+								return {
+									icon: 'fa-calendar-minus-o',
+									status: ''
+								}
 							}else if(!chapter.publishedDate) {
 
 								//Has been started
-								return 'fa-pencil';
+								return {
+									icon: 'fa-pencil',
+									status: 'warn'
+								}
 							}else{
 								//Has been written
-								return 'fa-check';
+								return {
+									icon: 'fa-check',
+									status: 'success'
+								}
 							}
 
 
 						}else{
 							if(!chapter.startedDate){
 								//Has not been written
-								return 'fa-times';
+								return {
+									icon: 'fa-times',
+									status: 'danger'
+								}
 
 							}else if(!chapter.publishedDate) {
 
 								//Has been written
-								return 'fa-check';
+								return {
+									icon: 'fa-check',
+									status: 'success'
+								}
 							}else {
 								//has not been started
-								return 'fa-bel';
+								return {
+									icon: 'fa-bel',
+									status: ''
+								}
 							}
 
 						}
-
 					}
-
 				}
 			}
 		}
