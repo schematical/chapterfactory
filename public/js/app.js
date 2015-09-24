@@ -79,8 +79,8 @@ cfcore.config(
 		}
 	])
 .directive('titleTimeline',
-	['Title','Chapter',
-		function (Title, Chapter) {
+	['NJaxBootstrap','Title','Chapter',
+		function (NJaxBootstrap, Title, Chapter) {
 			return {
 				replace: true,
 				scope: {
@@ -96,6 +96,9 @@ cfcore.config(
 							scope.chapters[i].timeline = scope.getChapterClass(scope.chapters[i])
 						}
 					});
+					scope.isOwner = function(){
+						return (scope.title.owner == NJaxBootstrap.user._id);
+					}
 					scope.getChapterClass = function(chapter){
 						var now = new Date();
 						if(chapter.dueDate > now){

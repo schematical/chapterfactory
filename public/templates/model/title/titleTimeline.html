@@ -11,7 +11,10 @@
                 </div>
                 <div class="timeline-panel">
                     <div class="timeline-heading">
-                        <h4 class="timeline-title" ng-bind="chapter.name"></h4>
+                        <h4 class="timeline-title" >
+                            <span ng-bind="chapter.name"></span>
+                            <small ng-if="isOwner() " class="text-muted"><a href="//{{ chapter.url }}"><i class="fa fa-pencil"></i> edit</a></small>
+                        </h4>
                         <p>
                             <small class="text-muted"><i class="fa fa-clock-o"></i>  <time-ago from-time='{{ chapter.dueDate }}'></time-ago></small>
                         </p>
