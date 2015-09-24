@@ -58,7 +58,7 @@ cfcore.config(
 
 
 }])
-.controller('HomeCtl',['$scope', '$q', 'Title', 'Chapter', function($scope, $q, Title, Chapter){
+.controller('HomeCtl',['$scope', '$q', '$timeout', 'Title', 'Chapter', function($scope, $q, $timeout, Title, Chapter){
 		$scope.title = new Title({
 			chapterCount:6
 		});
@@ -106,8 +106,12 @@ cfcore.config(
 
 		}
 		$scope.onRegisterFinish = function(user){
-			console.log(user);
-			$scope.title.owner = user._id;
+			$scope.user = user;
+			$scope.saveTitle();
+
+		}
+		$scope.saveTitle = function(){
+			$scope.title.owner = $scope.user._id;
 			$scope.title.$save().then(function(){
 
 				console.log("Saved Title");
@@ -120,11 +124,13 @@ cfcore.config(
 				$q.all(promisses).then(function(){
 
 					$scope.step = 5;
-					console.log("Send them to the detail screen and prompt to invite");
+					$timeout(function(){
+						alert('//' + $scope.title.url);
+						document.location = '//' + $scope.title.url;
+
+					}, 2000);
 				})
 			})
-
-
 		}
 		$scope.updateChapters = function(){
 			$scope.chapters = [];

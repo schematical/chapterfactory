@@ -19,7 +19,7 @@ module.exports = function () {
 		"models": {
 			"title": {
 				"parent": "owner",
-				"uri_prefix": "/locations",
+				"uri_prefix": "/title",
 				"fields": {
 					"namespace": "namespace",
 					"name": "string",

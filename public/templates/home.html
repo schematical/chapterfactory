@@ -25,6 +25,15 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="form-group " ng-class="{ 'has-error': titleNamespaceError }" ng-show="false">
+                            <label class="control-label" ng-bind="titleNamespaceError || 'This is just the url friendly name'" for="title_namespace"></label>
+                            <div><!--ng-class="{'input-group': step ==0 }">-->
+                                <input id="title_namespace" class="form-control" type="text" placeholder="my-amazing-book" ng-model="title.namespace" njax-namespace="title_name" tabindex="-1" readonly>
+                               <!-- <span class="input-group-btn" ng-show="step == 0">
+                                    <button class="btn btn-default" type="button" ng-bind="titleName_action" ng-click="next(1)"></button>
+                                </span>-->
+                            </div>
+                        </div>
                         <div  ng-show="step >= 1">
                             <div class="form-group"  ng-class="{ 'has-error': titleDescError }">
                                 <label class="control-label" ng-bind="titleDescError || 'Tell us about your book'" for="title_name"></label>
@@ -43,8 +52,8 @@
 
                                     </select>
                                     <span class="input-group-btn" ng-show="step == 2">
-                                    <button class="btn btn-default" type="button" ng-bind="titleChapterCount_action" ng-click="next(3)"></button>
-                                </span>
+                                        <button class="btn btn-default" type="button" ng-bind="titleChapterCount_action" ng-click="next(3)"></button>
+                                    </span>
                             </div>
                         </div>
                         <div ng-show="step >= 3">
@@ -54,7 +63,7 @@
                                         <p>
                                             How does this schedule look?
                                         </p>
-                                        <button class="btn btn-default btn-block" type="button"  ng-click="next(4)">Looks good to me</button>
+                                        <button class="btn btn-default btn-block" type="button"  ng-click="next(4)" ng-show="step == 3">Looks good to me</button>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="panel panel-default" ng-repeat="chapter in chapters">
@@ -90,24 +99,13 @@
                                     </div>
                                     <div ng-show="step > 4">
                                         <div class="alert alert-success">
-                                            Great work!
+                                            Great work! Lets check out your book...
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        <div  ng-show="step >= 5">
-                            <h3>Assemble your supporters!</h3>
-                            <p>
-                                //TODO: Facebook, Twitter, Email, Etc
-                            </p>
-
-
-                        </div>
-
-
-
 
 
                     </form>
