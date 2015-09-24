@@ -31,6 +31,7 @@ module.exports = function () {
 						"bootstrap_populate": "req.user"
 					},
 					"chapterCount":"number",
+					"cover":"s3-asset",
 					"archiveDate": "date"
 				}
 			},
@@ -42,6 +43,8 @@ module.exports = function () {
 					"name": "string",
 					"desc": "md",
 					"chapterNum":"number",
+					"content":"md",
+					"content_html":"string",
 					"title": {
 						"type": "ref",
 						"ref": "title",

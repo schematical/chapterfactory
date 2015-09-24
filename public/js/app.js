@@ -12,6 +12,7 @@ var cfcore = angular.module(
 		'ngCookies',
 		'njax',
 		'ui.router',
+		'yaru22.angular-timeago'
 		/*'njax.bootstrap',
 		'njax.directives',
 		'njax.application.controller',
@@ -54,10 +55,76 @@ cfcore.config(
 
 		}
 	]
-).run([ function(){
+)
+.directive('sharePanel',
+	[
+		function () {
+			return {
+				replace: true,
+				scope: {
+					title: '=title'
+				},
+				templateUrl: '/templates/model/sharePanel.html',
+				link: function (scope, element, attrs) {
+
+					scope.$watch('title', function(){
+						if(!scope.title){
+							return;
+						}
+						scope.encoded_url = encodeURI('http://' + scope.title.url)
+
+					});
+				}
+			}
+		}
+	])
+.directive('titleTimeline',
+	['Title','Chapter',
+		function (Title, Chapter) {
+			return {
+				replace: true,
+				scope: {
+					title:'=title'
+				},
+				templateUrl: '/templates/model/title/titleTimeline.html',
+				link: function (scope, element, attrs) {
+
+					Chapter.$query({ title: scope.title._id }).then(function(data){
+
+						scope.chapters = data.response;
+					});
+					scope.getChapterClass = function(chapter){
+						var now = new Date();
+						if(chapter.dueDate > now){
+							//Has been written
+							return 'fa-check';
+
+							//Has been started
+							return 'fa-pencil';
+
+							//Has not been written
+							return 'fa-calendar-minus-o';
+
+						}else{
+							//Has been written
+							return 'fa-check';
+
+							//has not been started
+							return 'fa-bel';
+
+							//Has not been written
+
+							return 'fa-times';
+
+						}
 
 
-}])
+					}
+
+				}
+			}
+		}
+])
 .controller('HomeCtl',['$scope', '$q', '$timeout', 'Title', 'Chapter', function($scope, $q, $timeout, Title, Chapter){
 		$scope.title = new Title({
 			chapterCount:6
@@ -163,4 +230,8 @@ cfcore.config(
 		})
 		$scope.updateChapters();
 
-}]);
+}])
+.run(['timeAgo', function(timeAgo){
+	timeAgo.settings.allowFuture = true;
+
+}])
