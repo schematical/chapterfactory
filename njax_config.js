@@ -19,7 +19,7 @@ module.exports = function () {
 		"models": {
 			"title": {
 				"parent": "owner",
-				"uri_prefix": "/title",
+				"uri_prefix": "/titles",
 				"fields": {
 					"namespace": "namespace",
 					"name": "string",
@@ -28,7 +28,7 @@ module.exports = function () {
 					"owner": {
 						"type": "ref",
 						"ref": "account",
-						"bootstrap_populate": "req.user"
+						"bootstrap_populate": "user"
 					},
 					"chapterCount":"number",
 					"cover":"s3-asset",
@@ -37,20 +37,20 @@ module.exports = function () {
 			},
 			"chapter": {
 				"parent": "title",
-				"uri_prefix": "/chapter",
+				"uri_prefix": "/chapters",
 				"fields": {
 					"namespace": "namespace",
 					"name": "string",
 					"desc": "md",
 					"chapterNum":"number",
-					"content":"md",
+					"content_raw":"string",
 					"content_html":"string",
 					"startedDate":"date",
 					"publishedDate":"date",
 					"title": {
 						"type": "ref",
 						"ref": "title",
-						"bootstrap_populate": "req.title"
+						"bootstrap_populate": "title"
 					},
 					"dueDate":"date",
 					"archiveDate": "date"

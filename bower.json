@@ -36,7 +36,8 @@
     "ng-table": "~0.8.3",
     "angular-socket-io": "~0.7.0",
     "angular-ui-router": "~0.2.15",
-    "angular-timeago": "~0.2.4"
+    "angular-timeago": "~0.2.4",
+    "textAngular": "~1.4.6"
   },
   "resolutions": {
     "font-awesome": "~4.4",

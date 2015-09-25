@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Get Started!
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <div><!-- ng-if="isOwner()">-->
+            <div ng-if="!chapter.startedDate">
+                <h4 class="text-center">Ready to start writing {{ chapter.name }}?</h4>
+
+                <button ng-click="markStarted()" type="button" class="btn btn-outline btn-primary btn-lg btn-block">Start Writing Now</button>
+            </div>
+            <div ng-if="chapter.startedDate">
+                <text-angular ng-model="chapter.content_raw"></text-angular>
+
+                <button ng-click="saveContent()" type="button" class="btn btn-outline btn-primary btn-lg pull-right">Save</button>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /.panel-body -->
+</div>

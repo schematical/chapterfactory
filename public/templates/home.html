@@ -19,9 +19,9 @@
                         <div class="form-group " ng-class="{ 'has-error': titleNameError }">
                             <label class="control-label" ng-bind="titleNameError || 'What is the name of your book?'" for="title_name"></label>
                             <div ng-class="{'input-group': step ==0 }">
-                                <input id="title_name" class="form-control" type="text" placeholder="My Amazing Book" ng-model="title.name" >
+                                <input id="title_name" class="form-control input-lg" type="text" placeholder="My Amazing Book" ng-model="title.name" >
                                 <span class="input-group-btn" ng-show="step == 0">
-                                    <button class="btn btn-default" type="button" ng-bind="titleName_action" ng-click="next(1)"></button>
+                                    <button class="btn btn-default btn-lg" type="button" ng-bind="titleName_action" ng-click="next(1)"></button>
                                 </span>
                             </div>
                         </div>
@@ -76,7 +76,17 @@
                                                                  <i class="fa fa-bookmark-o"></i>
                                                             </span>
 
-                                                            <input type="text" class="form-control" ng-model="chapter.name" />
+                                                            <input id="chapter_{{chapter.chapterNum}}" type="text" class="form-control" ng-model="chapter.name" />
+                                                        </div>
+                                                    </div>
+                                                    <div ng-show='false'> <!--class="col-md-6">-->
+
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon" id="basic-addon1">
+                                                                 <i class="fa fa-bookmark-o"></i>
+                                                            </span>
+
+                                                            <input type="text" class="form-control" ng-model="chapter.namespace" njax-namespace="chapter_{{chapter.chapterNum}}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">

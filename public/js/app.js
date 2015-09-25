@@ -12,7 +12,8 @@ var cfcore = angular.module(
 		'ngCookies',
 		'njax',
 		'ui.router',
-		'yaru22.angular-timeago'
+		'yaru22.angular-timeago',
+		'textAngular',
 		/*'njax.bootstrap',
 		'njax.directives',
 		'njax.application.controller',
@@ -67,7 +68,7 @@ cfcore.config(
 				templateUrl: '/templates/model/sharePanel.html',
 				link: function (scope, element, attrs) {
 
-					scope.$watch('title', function(){
+					scope.$watch('title._id', function(){
 						if(!scope.title){
 							return;
 						}
@@ -259,6 +260,27 @@ cfcore.config(
 		$scope.updateChapters();
 
 }])
+.directive('chapterFancyEditor',
+	['NJaxBootstrap','Title','Chapter',
+		function (NJaxBootstrap, Title, Chapter) {
+			return {
+				replace: true,
+				scope: {
+					chapter: '=chapter'
+				},
+				templateUrl: '/templates/model/chapter/_fancy_editor.html',
+				link: function (scope, element, attrs) {
+
+					scope.markStarted = function(){
+						scope.chapter.startedDate = new Date();
+						scope.chapter.$save().then(function(){
+							console.log("Started");
+						})
+					}
+				}
+			}
+		}
+])
 .run(['timeAgo', function(timeAgo){
 	timeAgo.settings.allowFuture = true;
 
