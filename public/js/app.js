@@ -277,9 +277,11 @@ console.log($("#register").offset().top);
 			if(!$scope.chapter){
 				return;
 			}
-			$scope.chapter.isOwner(NJaxBootstrap.user).then(function(is_owner){
-				$scope.is_owner = is_owner;
-			})
+			if(NJaxBootstrap.user){
+				$scope.chapter.isOwner(NJaxBootstrap.user).then(function(is_owner){
+					$scope.is_owner = is_owner;
+				})
+			}
 		});
 		$scope.$parent.$watch('title', function(){
 			$scope.title = $scope.$parent.title;
@@ -321,7 +323,7 @@ console.log($("#register").offset().top);
 					}
 					scope.promptForPublish = function(){
 						scope._prompt_for_publish = true;
-						$('#myModal').modal('show')
+						$('#publishModal').modal('show')
 					}
 					scope.$watch('chapter.content_html', function(newVal){
 						scope.resetSaveBtn();
@@ -330,6 +332,14 @@ console.log($("#register").offset().top);
 						scope.saveText = 'Save';
 						scope.saveClass = 'btn-primary';
 					}
+					scope.$watch('chapter', function(){
+						if(!scope.chapter){
+							return null;
+						}
+						scope.chapter.parent().then(function(title){
+							scope.notes = "Check out " + scope.chapter.name + ", the newest chapter of my book  " + title.name + " ";
+						})
+					});
 
 					scope.resetSaveBtn();
 				}
