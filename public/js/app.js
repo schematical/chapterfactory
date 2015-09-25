@@ -194,7 +194,17 @@ cfcore.config(
 				return;
 			}
 			$scope.titleDescError = null;
+			if(curr_step == 4){
+				$timeout(function(){
+console.log($("#register").offset().top);
+					$('html, body').animate({
+						scrollTop: $("#register").offset().top
+					}, 2000);
+				}, 500)
+
+			}
 			$scope.step = curr_step;
+
 
 
 
@@ -271,12 +281,40 @@ cfcore.config(
 				templateUrl: '/templates/model/chapter/_fancy_editor.html',
 				link: function (scope, element, attrs) {
 
+
 					scope.markStarted = function(){
 						scope.chapter.startedDate = new Date();
 						scope.chapter.$save().then(function(){
 							console.log("Started");
 						})
 					}
+					scope.saveContent = function(){
+						scope.saveText = 'Saving...';
+						scope.saveClass = 'btn-warn';
+						scope.chapter.$save().then(function(){
+							scope.saveText = 'Saved!';
+							scope.saveClass = 'btn-success';
+						})
+					}
+					scope.markPublished = function(){
+						scope.chapter.publishedDate = new Date();
+						scope.chapter.$save().then(function(){
+							console.log("Publish");
+						})
+					}
+					scope.promptForPublish = function(){
+						scope._prompt_for_publish = true;
+						$('#myModal').modal('show')
+					}
+					scope.$watch('chapter.content_html', function(newVal){
+						scope.resetSaveBtn();
+					})
+					scope.resetSaveBtn = function(){
+						scope.saveText = 'Save';
+						scope.saveClass = 'btn-primary';
+					}
+
+					scope.resetSaveBtn();
 				}
 			}
 		}
