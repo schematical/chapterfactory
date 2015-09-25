@@ -98,7 +98,7 @@ cfcore.config(
 						}
 					});
 					scope.isOwner = function(){
-						return (scope.title.owner == NJaxBootstrap.user._id);
+						return NJaxBootstrap.user &&  (scope.title.owner == NJaxBootstrap.user._id);
 					}
 					scope.getChapterClass = function(chapter){
 						var now = new Date();
@@ -270,6 +270,23 @@ console.log($("#register").offset().top);
 		$scope.updateChapters();
 
 }])
+.controller('ChapterDetailCtl', ['$scope','NJaxBootstrap',
+	function($scope, NJaxBootstrap){
+		$scope.$parent.$watch('chapter', function() {
+			$scope.chapter = $scope.$parent.chapter;
+			if(!$scope.chapter){
+				return;
+			}
+			$scope.chapter.isOwner(NJaxBootstrap.user).then(function(is_owner){
+				$scope.is_owner = is_owner;
+			})
+		});
+		$scope.$parent.$watch('title', function(){
+			$scope.title = $scope.$parent.title;
+		})
+
+	}
+])
 .directive('chapterFancyEditor',
 	['NJaxBootstrap','Title','Chapter',
 		function (NJaxBootstrap, Title, Chapter) {

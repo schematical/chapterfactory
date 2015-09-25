@@ -5,7 +5,7 @@
     <!-- /.panel-heading -->
     <div class="panel-body">
         <ul class="timeline">
-            <li ng-repeat="chapter in chapters" ng-class="{ 'timeline-inverted': !$even }">
+            <li ng-repeat="chapter in chapters | orderBy:'chapterNum'" ng-class="{ 'timeline-inverted': !$even }">
                 <div class="timeline-badge {{  chapter.timeline.status }}">
                     <i class="fa {{ chapter.timeline.icon }}" ></i>
                 </div>

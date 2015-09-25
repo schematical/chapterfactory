@@ -22,7 +22,8 @@
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" ng-click="promptForPublish();">Mark Published</a></li>
+                        <li ng-show="!chapter.publishedDate"><a href="#" ng-click="promptForPublish();">Mark Published</a></li>
+                        <!--<li ng-show="chapter.publishedDate"><a href="#" ng-click="promptForUnublish();">Unpublished</a></li>-->
                         <!--
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Separated link</a></li>-->
