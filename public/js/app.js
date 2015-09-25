@@ -80,8 +80,8 @@ cfcore.config(
 		}
 	])
 .directive('titleTimeline',
-	['NJaxBootstrap','Title','Chapter',
-		function (NJaxBootstrap, Title, Chapter) {
+	['NJaxBootstrap', 'NJaxSocket', 'Title','Chapter',
+		function (NJaxBootstrap, NJaxSocket, Title, Chapter) {
 			return {
 				replace: true,
 				scope: {
@@ -100,6 +100,43 @@ cfcore.config(
 					scope.isOwner = function(){
 						return NJaxBootstrap.user &&  (scope.title.owner == NJaxBootstrap.user._id);
 					}
+
+
+
+
+
+
+					scope.title.connect(function (event) {
+						console.log("onEvent:", event);
+						switch (event.event) {
+							case('create'):
+								scope.chapters.push(event.data);
+								break;
+							case('update'):
+								for (var i in scope.chapters) {
+									if (scope.chapters[i]._id == event.data._id) {
+
+										scope.chapters[i].data = event.data;
+
+									}
+
+								}
+								break;
+							case('archive'):
+								for (var i in scope.chapters) {
+									if (scope.chapters[i]._id == event.data._id) {
+										scope.chapters.splice(i, 1);
+									}
+
+								}
+								break;
+						}
+						scope.$digest();
+
+					}).then(function (data) {
+						//I Dont think anything will happen here
+					});
+
 					scope.getChapterClass = function(chapter){
 						var now = new Date();
 						if(chapter.dueDate > now){
@@ -300,7 +337,19 @@ console.log($("#register").offset().top);
 				templateUrl: '/templates/model/chapter/_fancy_editor.html',
 				link: function (scope, element, attrs) {
 
-
+					scope.keyDown = function($event){
+						console.log($event);
+						if($event.ctrlKey) {
+							switch ($event.keyCode) {
+								case(83)://s
+									scope.saveContent();
+									$event.preventDefault();
+									break;
+								default:
+									break;
+							}
+						}
+					}
 					scope.markStarted = function(){
 						scope.chapter.startedDate = new Date();
 						scope.chapter.$save().then(function(){
@@ -316,9 +365,13 @@ console.log($("#register").offset().top);
 						})
 					}
 					scope.markPublished = function(){
+						scope.publishBtnClass = "btn-warn"
 						scope.chapter.publishedDate = new Date();
 						scope.chapter.$save().then(function(){
-							console.log("Publish");
+							scope.publishBtnClass = "btn-success"
+							$timeout(function(){
+								$('#publishModal').modal('hide');
+							})
 						})
 					}
 					scope.promptForPublish = function(){
@@ -340,7 +393,7 @@ console.log($("#register").offset().top);
 							scope.notes = "Check out " + scope.chapter.name + ", the newest chapter of my book  " + title.name + " ";
 						})
 					});
-
+					scope.publishBtnClass = "btn-primary"
 					scope.resetSaveBtn();
 				}
 			}

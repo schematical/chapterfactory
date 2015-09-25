@@ -20,9 +20,15 @@
                         </p>
                     </div>
                     <div class="timeline-body">
-                        <p>
-                            {{ chapter.content }}
-                        </p>
+                        <div ng-if="chapter.publishedDate">
+                            <div class="timeline-content-html" ng-bind-html="chapter.content_html">
+
+                            </div>
+                            <a href="//{{chapter.url}}" class="pull-right">
+                                <i class="fa fa-book"></i>
+                                Read More
+                            </a>
+                        </div>
                     </div>
                 </div>
             </li>
