@@ -27,6 +27,6 @@ node_modules
 
 public/bower_components
 .idea
-_env_config.js
+env_config.js
 _tmp
 _cache
