@@ -12,7 +12,7 @@ var app = njax(njax_config, env_config);
 modules(app);
 models(app);
 
-app.all('/assets/*', app.njax.static_serve('assets'));
+app.all('/_build/*', app.njax.static_serve('_build'));
 app.all('/imgs/*', app.njax.static_serve('imgs'));
 /*
 

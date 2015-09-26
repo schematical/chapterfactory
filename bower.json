@@ -15,6 +15,8 @@
     "/js"
   ],
   "dependencies": {
+    "jquery": "~2.1.4",
+    "angular": "*",
     "bootstrap": "~3.3.1",
     "datatables": "~1.10.4",
     "datatables-plugins": "~1.0.1",
@@ -26,18 +28,19 @@
     "datatables-responsive": "~1.0.3",
     "bootstrap-social": "~4.10.1",
     "flot.tooltip": "~0.8.4",
-    "angular": "*",
+
     "angular-route": "*",
     "angular-cookies": "*",
     "angular-resource": "*",
     "angular-strap": "*",
     "angular-load": "*",
     "angular-sanitize": "*",
-    "ng-table": "~0.8.3",
     "angular-socket-io": "~0.7.0",
     "angular-ui-router": "~0.2.15",
     "angular-timeago": "~0.2.4",
-    "textAngular": "~1.4.6"
+    "textAngular": "~1.4.6",
+    "ng-table": "~0.8.3"
+
   },
   "resolutions": {
     "font-awesome": "~4.4",
