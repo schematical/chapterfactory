@@ -15,6 +15,7 @@
     "mkdirp": "*",
     "mongoose": "*",
     "njax": "0.2.13",
+    "redis": "^2.0.1",
     "socket.io": "*",
     "socket.io-redis": "^0.1.4",
     "underscore": "*"
