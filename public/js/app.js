@@ -399,6 +399,7 @@ console.log($("#register").offset().top);
 			}
 		}
 ])
+
 .run(['timeAgo', function(timeAgo){
 	timeAgo.settings.allowFuture = true;
 
