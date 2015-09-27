@@ -1,22 +1,34 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	require('jit-grunt')(grunt);
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-aws-s3');
 	grunt.loadNpmTasks('grunt-angular-templates');
 	grunt.loadNpmTasks('grunt-angular-builder');
 	grunt.loadNpmTasks('grunt-bower');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+
 
 	var config = {
-		aws:grunt.file.readJSON('aws-keys.json')
+		aws: grunt.file.readJSON('aws-keys.json')
 	};
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
-			build:[
+			build: [
 				'public/_build/*'
 			]
+		},
+		copy: {
+			main: {
+				files: [
+
+					// includes files within path and its sub-directories
+					{expand: true,  cwd: 'public/bower_components/font-awesome/fonts', src: ['**'], dest: 'public/_build/fonts'}
+				]
+			}
 		},
 		less: {
 			development: {
@@ -39,28 +51,40 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		'aws_s3':{
-			options:{
-				accessKeyId:config.aws.accessKeyId,
-				secretAccessKey:config.aws.secretAccessKey,
+		'aws_s3': {
+			options: {
+				accessKeyId: config.aws.accessKeyId,
+				secretAccessKey: config.aws.secretAccessKey,
 				uploadConcurrency: 5, // 5 simultaneous uploads
 				downloadConcurrency: 5 // 5 simultaneous downloads
 
 			},
 			prod: {
 				options: {
-					bucket:'prod-chapterfactory-com-assets'
+					bucket: 'prod-chapterfactory-com-assets'
 					//region: 'us-west-2'
 				},
 				files: [
-					{expand: true, cwd: 'public/_build/js/', src: ['**'], dest: 'js/', differential:true},
-					{expand: true, cwd: 'public/_build/css/', src: ['**'], dest: 'css/', differential:true},
-					{expand: true, cwd: 'public/img/', src: ['**'], dest: 'img/', differential:true},
-					{expand: true, cwd: 'public/fonts/', src: ['**'], dest: 'fonts/', differential:true},
-					{expand: true, cwd: 'public/templates/', src: ['**'], dest: 'templates/', differential:true},
-					{expand: true, cwd: 'public/_build/vendor/', src: ['**'], dest: 'vendor/', differential:true},
-					{expand: true, cwd: 'public/js/', src: ['**'], dest: 'js/', differential:true},
-					{expand: true, cwd: 'node_modules/njax/public/js/', src: ['**'], dest: 'njax/js', differential:true},
+					{
+						expand: true,
+						cwd: 'public/_build/js/',
+						src: [
+							'<%= pkg.name %>.min.js',
+							'vendor.js'
+						],
+						dest: 'js/',
+						differential: true
+					},
+					{
+						expand: true,
+						cwd: 'public/_build/css/',
+						src: ['**'],
+						dest: 'css/',
+						differential: true
+					},
+					{expand: true, cwd: 'public/img/', src: ['**'], dest: 'img/', differential: true},
+					{expand: true, cwd: 'public/fonts/', src: ['**'], dest: 'fonts/', differential: true}//,
+					//{expand: true, cwd: 'public/templates/', src: ['**'], dest: 'templates/', differential:true},
 				]
 			}
 		},
@@ -68,7 +92,7 @@ module.exports = function(grunt) {
 			options: {
 				mainModule: '<%= pkg.name %>',
 				// angular-builder ignores these modules
-				externalModules:[
+				externalModules: [
 					'ngRoute',
 					'ngCookies',
 					'ngResource',
@@ -90,7 +114,7 @@ module.exports = function(grunt) {
 					targetDir: 'public/_build/'
 				},
 
-				src:  [
+				src: [
 					'public/js/**/*.js',
 					'node_modules/njax/public/js/**/*.js',
 					'public/_build/js/templates.js',
@@ -98,8 +122,8 @@ module.exports = function(grunt) {
 
 				],
 				/*forceInclude:[
-					'node_modules/njax/public/js/services/subscription.js',
-				],*/
+				 'node_modules/njax/public/js/services/subscription.js',
+				 ],*/
 				dest: 'public/_build/js/<%= pkg.name %>.js'
 			},
 			prod: {
@@ -110,7 +134,7 @@ module.exports = function(grunt) {
 					enabled: true,
 					targetDir: 'public/_build/'
 				},
-				src:  [
+				src: [
 					'public/js/**/*.js',
 					'node_modules/njax/public/js/**/*.js',
 					'node_modules/njax/public/js/services/*.js',
@@ -120,31 +144,31 @@ module.exports = function(grunt) {
 				dest: 'public/_build/js/<%= pkg.name %>.js'
 			}
 		},
-		ngtemplates:    {
+		ngtemplates: {
 			prod: {
-				src:        'public/templates/**/**.html',
-				dest:       'public/_build/js/templates.js',
-				options:    {
-					url:    function(url) {
+				src: 'public/templates/**/**.html',
+				dest: 'public/_build/js/templates.js',
+				options: {
+					url: function (url) {
 						var remove_prefix = 'public/';
-						if(url.substr(0, remove_prefix.length) == remove_prefix){
+						if (url.substr(0, remove_prefix.length) == remove_prefix) {
 							url = url.substr(remove_prefix.length);
 						}
 						return url;
 					},
 					module: '<%= pkg.name %>',
-					htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true },
+					htmlmin: {collapseWhitespace: true, collapseBooleanAttributes: true},
 					prefix: 'https://chapterfactory.re'// 'https://s3.amazonaws.com/townsquare-prod-assets'
 				}
 			},
 			local: {
 
-				src:        'public/templates/**/**.html',
-				dest:       'public/_build/js/templates.js',
-				options:    {
-					url:    function(url) {
+				src: 'public/templates/**/**.html',
+				dest: 'public/_build/js/templates.js',
+				options: {
+					url: function (url) {
 						var remove_prefix = 'public/';
-						if(url.substr(0, remove_prefix.length) == remove_prefix){
+						if (url.substr(0, remove_prefix.length) == remove_prefix) {
 							url = url.substr(remove_prefix.length);
 						}
 						return url;
@@ -209,7 +233,7 @@ module.exports = function(grunt) {
 					]
 				}
 				/*src: 'public/_build/js/<%= pkg.name %>.js',
-				dest: 'public/_build/js/<%= pkg.name %>.min.js'*/
+				 dest: 'public/_build/js/<%= pkg.name %>.min.js'*/
 			},
 			prod: {
 				options: {
@@ -228,21 +252,40 @@ module.exports = function(grunt) {
 				src: 'public/_build/js/<%= pkg.name %>.js',
 				dest: 'public/_build/js/<%= pkg.name %>.min.js'
 			}
+		},
+		cssmin: {
+			local: {
+				files: {
+					'public/_build/css/main.min.css': [
+						'public/css/main.css',
+						'public/bower_components/ng-table/dist/ng-table.min.css',
+						'public/css/plugins/morris.css',
+						'public/css/timeline.css',
+						'public/bower_components/font-awesome/css/font-awesome.min.css',
+						'public/bower_components/angular-timeago/dist/angular-timeago.css',
+						'public/bower_components/textAngular/dist/textAngular.css'
+					]
+				}
+			}
 		}
+
+
 	});
 
-	grunt.registerTask ('debug', ['angular-builder::debug']);
+	grunt.registerTask('debug', ['angular-builder::debug']);
 
 	grunt.registerTask('build-local', [
 		'clean:build',
+		'copy',
 		'less',
+		'cssmin:local',
 		'ngtemplates:local',
 		'angular-builder:local',
 		'concat:local',
 		'bower:local',
 		'uglify:local'
 	]);
-
+	grunt.registerTask('deploy-prod', ['build-local', 'aws_s3:prod']);
 
 	grunt.registerTask('default', ['less', 'watch']);
 };
