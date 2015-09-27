@@ -83,7 +83,7 @@ module.exports = function (grunt) {
 						differential: true
 					},
 					{expand: true, cwd: 'public/img/', src: ['**'], dest: 'img/', differential: true},
-					{expand: true, cwd: 'public/fonts/', src: ['**'], dest: 'fonts/', differential: true}//,
+					{expand: true, cwd: 'public/_build/fonts/', src: ['**'], dest: 'fonts/', differential: true}//,
 					//{expand: true, cwd: 'public/templates/', src: ['**'], dest: 'templates/', differential:true},
 				]
 			}
@@ -146,7 +146,10 @@ module.exports = function (grunt) {
 		},
 		ngtemplates: {
 			prod: {
-				src: 'public/templates/**/**.html',
+				src: [
+					'public/templates/**/**.html',
+					'node_modules/njax/public/templates/directives/**/**.html',
+				],
 				dest: 'public/_build/js/templates.js',
 				options: {
 					url: function (url) {
