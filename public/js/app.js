@@ -326,6 +326,24 @@ console.log($("#register").offset().top);
 
 	}
 ])
+.directive('cfSidebar',
+	['NJaxBootstrap',
+		function (NJaxBootstrap) {
+			return {
+				replace: true,
+				scope: {
+					//chapter: '=chapter'
+				},
+				templateUrl: '/templates/directives/cfSidebar.html',
+				link: function (scope, element, attrs) {
+
+
+				}
+			}
+		}
+	]
+)
+
 .directive('chapterFancyEditor',
 	['NJaxBootstrap','Title','Chapter',
 		function (NJaxBootstrap, Title, Chapter) {

@@ -29,7 +29,7 @@
 <body ng-app="cfcore">
 <div id="wrapper">
 
-    {{> _sidebar }}
+    <cf-sidebar></cf-sidebar>
 
     <div id="page-wrapper">
 

@@ -49,6 +49,20 @@ module.exports = function (grunt) {
 				options: {
 					nospawn: true
 				}
+			},
+			js:{
+				files: ['public/js/**/*.js', 'node_modules/njax/public/js/**/*.js'], // which files to watch
+				tasks: [
+					'ngtemplates:local',
+					'angular-builder:local',
+					'concat:local',
+				/*	'bower:local',*/
+					'uglify:local'
+				],
+				options: {
+					nospawn: true
+				}
+
 			}
 		},
 		'aws_s3': {

@@ -14,16 +14,6 @@ models(app);
 
 app.all('/_build/*', app.njax.static_serve('_build'));
 app.all('/imgs/*', app.njax.static_serve('imgs'));
-/*
-
-app.locals.partials._meta = '_meta';
-
-app.locals.partials._meta_footer = '_meta_footer';
-app.locals.partials._meta_angular = '_meta_angular';
- */
-app.locals.partials._sidebar = '_sidebar';
-/*app.locals.partials._header = '_header';
-app.locals.partials._footer = '_footer';*/
 
 var routes = require(__dirname + '/lib/routes');
 routes(app);
