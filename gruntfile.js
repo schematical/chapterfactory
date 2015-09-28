@@ -5,7 +5,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-aws-s3');
 	grunt.loadNpmTasks('grunt-angular-templates');
 	grunt.loadNpmTasks('grunt-angular-builder');
-	grunt.loadNpmTasks('grunt-bower');
+
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -16,12 +16,15 @@ module.exports = function (grunt) {
 	};
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		bower: grunt.file.readJSON('bower.json'),
+		build_base_dir:'public/_build',
+		build_dir:'<%= build_base_dir %>/<%= bower.version %>',
 		clean: {
 			build: [
-				'public/_build/*'
+				'<%= build_dir %>/*'
 			],
 			js: [
-				'public/_build/js/cfcore*'
+				'<%= build_dir %>/js/cfcore*'
 			]
 		},
 		copy: {
@@ -29,7 +32,7 @@ module.exports = function (grunt) {
 				files: [
 
 					// includes files within path and its sub-directories
-					{expand: true,  cwd: 'public/bower_components/font-awesome/fonts', src: ['**'], dest: 'public/_build/fonts'}
+					{expand: true,  cwd: 'public/bower_components/font-awesome/fonts', src: ['**'], dest: '<%= build_dir %>/fonts'}
 				]
 			}
 		},
@@ -85,23 +88,23 @@ module.exports = function (grunt) {
 				files: [
 					{
 						expand: true,
-						cwd: 'public/_build/js/',
+						cwd: '<%= build_dir %>/js/',
 						src: [
 							'<%= pkg.name %>.min.js',
 							'vendor.js'
 						],
-						dest: 'js/',
+						dest: '<%= bower.version %>/js/',
 						differential: true
 					},
 					{
 						expand: true,
-						cwd: 'public/_build/css/',
+						cwd: '<%= build_dir %>/css/',
 						src: ['**'],
-						dest: 'css/',
+						dest: '<%= bower.version %>/css/',
 						differential: true
 					},
-					{expand: true, cwd: 'public/img/', src: ['**'], dest: 'img/', differential: true},
-					{expand: true, cwd: 'public/_build/fonts/', src: ['**'], dest: 'fonts/', differential: true}//,
+					{expand: true, cwd: 'public/imgs/', src: ['**'], dest: '<%= bower.version %>/imgs/', differential: true},
+					{expand: true, cwd: '<%= build_dir %>/fonts/', src: ['**'], dest: '<%= bower.version %>/fonts/', differential: true}//,
 					//{expand: true, cwd: 'public/templates/', src: ['**'], dest: 'templates/', differential:true},
 				]
 			}
@@ -129,20 +132,20 @@ module.exports = function (grunt) {
 				},
 				assets: {
 					enabled: true,
-					targetDir: 'public/_build/'
+					targetDir: '<%= build_dir %>/'
 				},
 
 				src: [
 					'public/js/**/*.js',
 					'node_modules/njax/public/js/**/*.js',
-					'public/_build/js/templates.js',
+					'<%= build_dir %>/js/templates.js',
 
 
 				],
 				/*forceInclude:[
 				 'node_modules/njax/public/js/services/subscription.js',
 				 ],*/
-				dest: 'public/_build/js/<%= pkg.name %>.js'
+				dest: '<%= build_dir %>/js/<%= pkg.name %>.js'
 			},
 			prod: {
 				options: {
@@ -150,16 +153,16 @@ module.exports = function (grunt) {
 				},
 				assets: {
 					enabled: true,
-					targetDir: 'public/_build/'
+					targetDir: '<%= build_dir %>/'
 				},
 				src: [
 					'public/js/**/*.js',
 					'node_modules/njax/public/js/**/*.js',
 					'node_modules/njax/public/js/services/*.js',
-					'public/_build/js/templates.js',
+					'<%= build_dir %>/js/templates.js',
 
 				],
-				dest: 'public/_build/js/<%= pkg.name %>.js'
+				dest: '<%= build_dir %>/js/<%= pkg.name %>.js'
 			}
 		},
 		ngtemplates: {
@@ -168,7 +171,7 @@ module.exports = function (grunt) {
 					'public/templates/**/**.html',
 					'node_modules/njax/public/templates/directives/**/**.html',
 				],
-				dest: 'public/_build/js/templates.js',
+				dest: '<%= build_dir %>/js/templates.js',
 				options: {
 					url: function (url) {
 						var remove_prefix = 'public/';
@@ -185,7 +188,7 @@ module.exports = function (grunt) {
 			local: {
 
 				src: 'public/templates/**/**.html',
-				dest: 'public/_build/js/templates.js',
+				dest: '<%= build_dir %>/js/templates.js',
 				options: {
 					url: function (url) {
 						var remove_prefix = 'public/';
@@ -205,21 +208,21 @@ module.exports = function (grunt) {
 			},
 			local: {
 				src: [
-					'public/_build/js/<%= pkg.name %>.js',
+					'<%= build_dir %>/js/<%= pkg.name %>.js',
 					'node_modules/njax/public/js/builder*.js',
 					'node_modules/njax/public/js/services/*.js',
 				],
-				dest: 'public/_build/js/<%= pkg.name %>.concat.js'
+				dest: '<%= build_dir %>/js/<%= pkg.name %>.concat.js'
 			}
 		},
-		bower: {
+	/*	bower: {
 			local: {
-				dest: 'public/_build/bower'
+				dest: '<%= build_dir %>/bower'
 			},
 			prod: {
-				dest: 'public/_build/bower'
+				dest: '<%= build_dir %>/bower'
 			}
-		},
+		},*/
 		uglify: {
 			local: {
 				options: {
@@ -231,30 +234,30 @@ module.exports = function (grunt) {
 					beautify: true,
 
 					sourceMapURL: '/js/<%= pkg.name %>.js.map',
-					sourceMapBasepath: 'bpublic/_build/js/',
+					sourceMapBasepath: 'b<%= build_dir %>/js/',
 					sourceMapRootpath: '/js',
 					soureMapInline: true
 				},
 				files: {
-					'public/_build/js/<%= pkg.name %>.min.js': ['public/_build/js/<%= pkg.name %>.concat.js'],
-					'public/_build/js/vendor.js': [
-						'public/_build/bower/dist/jquery.js',
-						'public/_build/bower/dist/js/bootstrap.js',
-						'public/_build/bower/angular.js',
-						'public/_build/bower/angular-cookies.js',
-						'public/_build/bower/angular-route.js',
-						'public/_build/bower/dist/ng-table.min.js',
-						'public/_build/bower/release/angular-ui-router.js',
-						'public/_build/bower/src/timeAgo.js',
-						'public/_build/bower/dist/textAngular.js',
-						'public/_build/bower/dist/textAngular-sanitize.js',
-						'public/_build/bower/dist/textAngularSetup.js',
-						'public/_build/bower/rangy-core.js',
-						'public/_build/bower/rangy-selectionsaverestore.js'
+					'<%= build_dir %>/js/<%= pkg.name %>.min.js': ['<%= build_dir %>/js/<%= pkg.name %>.concat.js'],
+					'<%= build_dir %>/js/vendor.js': [
+						'public/bower_components/jquery/dist/jquery.js',
+						'public/bower_components/bootstrap/dist/js/bootstrap.js',
+						'public/bower_components/angular/angular.min.js',
+						'public/bower_components/angular-cookies/angular-cookies.js',
+						'public/bower_components/angular-route/angular-route.js',
+						'public/bower_components/ng-table/dist/ng-table.min.js',
+						'public/bower_components/angular-ui-router/release/angular-ui-router.js',
+						'public/bower_components/angular-timeago/dist/angular-timeago.js',
+						'public/bower_components/textAngular/dist/textAngular.js',
+						'public/bower_components/textAngular/dist/textAngular-sanitize.js',
+						'public/bower_components/textAngular/dist/textAngularSetup.js',
+						'public/bower_components/rangy/rangy-core.js',
+						'public/bower_components/rangy/rangy-selectionsaverestore.js'
 					]
 				}
-				/*src: 'public/_build/js/<%= pkg.name %>.js',
-				 dest: 'public/_build/js/<%= pkg.name %>.min.js'*/
+				/*src: '<%= build_dir %>/js/<%= pkg.name %>.js',
+				 dest: '<%= build_dir %>/js/<%= pkg.name %>.min.js'*/
 			},
 			prod: {
 				options: {
@@ -266,18 +269,18 @@ module.exports = function (grunt) {
 					beautify: true,
 
 					sourceMapURL: '/js/<%= pkg.name %>.js.map',
-					sourceMapBasepath: 'bpublic/_build/js/',
+					sourceMapBasepath: 'b<%= build_dir %>/js/',
 					sourceMapRootpath: '/js',
 					soureMapInline: true
 				},
-				src: 'public/_build/js/<%= pkg.name %>.js',
-				dest: 'public/_build/js/<%= pkg.name %>.min.js'
+				src: '<%= build_dir %>/js/<%= pkg.name %>.js',
+				dest: '<%= build_dir %>/js/<%= pkg.name %>.min.js'
 			}
 		},
 		cssmin: {
 			local: {
 				files: {
-					'public/_build/css/main.min.css': [
+					'<%= build_dir %>/css/main.min.css': [
 						'public/css/main.css',
 						'public/bower_components/ng-table/dist/ng-table.min.css',
 						'public/css/plugins/morris.css',
@@ -294,7 +297,9 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('debug', ['angular-builder::debug']);
-
+	grunt.registerTask('test',  function() {
+		grunt.log.write(/*'Logging: <%= bower.version %> / <%= build_dir %>'*/JSON.stringify(grunt.config('build_dir')) ).ok();
+	});
 	grunt.registerTask('build-local', [
 		'clean:build',
 		'copy',
@@ -303,7 +308,6 @@ module.exports = function (grunt) {
 		'ngtemplates:local',
 		'angular-builder:local',
 		'concat:local',
-		'bower:local',
 		'uglify:local'
 	]);
 	grunt.registerTask('deploy-prod', ['build-local', 'aws_s3:prod']);

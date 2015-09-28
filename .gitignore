@@ -26,6 +26,8 @@ node_modules
 
 
 public/bower_components
+public/_build
+
 .idea
 env_config.js
 _tmp

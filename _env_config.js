@@ -38,3 +38,6 @@ module.exports = {
 	google_analytics_tracking_id: 'UA-xxxx'
 }
 
+var fs = require('fs');
+var bower = JSON.parse(fs.readFileSync(__dirname + '/bower.json'));
+module.exports.asset_url += '/' + bower.version;
