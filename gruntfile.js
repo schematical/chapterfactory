@@ -187,7 +187,7 @@ module.exports = function (grunt) {
 			},
 			local: {
 
-				src: 'public/templates/**/**.html',
+				src: ['public/templates/**/**.html', 'public/templates/**/**/**.html'],
 				dest: '<%= build_dir %>/js/templates.js',
 				options: {
 					url: function (url) {
