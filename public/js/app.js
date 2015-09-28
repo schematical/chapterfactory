@@ -62,6 +62,18 @@ cfcore.config(
 				}
 			});
 
+			$stateProvider.state('about', {
+				url: '/about',
+				views: {
+					body: {
+						templateUrl: '/templates/about.html',
+						controller: function ($scope) {
+							console.log("About Hit");
+						}
+					}
+				}
+			});
+
 			NJax.Builder.buildRoutes($urlRouterProvider, $stateProvider);
 
 		}
@@ -205,6 +217,16 @@ cfcore.config(
 		$scope.title = new Title({
 			chapterCount:6
 		});
+		$scope.resize = function() {
+			if (window.innerHeight < window.innerWidth) {
+				angular.element('.home-content').height(window.innerHeight);
+			}
+		}
+		$( window ).resize( function(){
+			$scope.resize();
+		});
+
+
 		$scope.step = 0;
 		$scope.titleName_action = 'Next';
 
@@ -278,7 +300,7 @@ console.log($("#register").offset().top);
 
 					$scope.step = 5;
 					$timeout(function(){
-						alert('//' + $scope.title.url);
+
 						document.location = '//' + $scope.title.url;
 
 					}, 2000);
@@ -315,6 +337,7 @@ console.log($("#register").offset().top);
 			$scope.updateChapters();
 		})
 		$scope.updateChapters();
+		$scope.resize();
 
 }])
 .controller('ChapterDetailCtl', ['$scope','NJaxBootstrap',
@@ -336,6 +359,7 @@ console.log($("#register").offset().top);
 
 	}
 ])
+
 .directive('cfSidebar',
 	['NJaxBootstrap',
 		function (NJaxBootstrap) {

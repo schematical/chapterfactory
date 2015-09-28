@@ -1,6 +1,8 @@
-<div>
+<div >
+
     <div ng-controller="HomeCtl">
-        <div class="row">
+
+        <div class="row" >
             <div class="col-md-12 text-center">
                 <h1>The Chapter Factory</h1>
                 <h4 style="font-style: italic">How do you write a book? One chapter at a time</h4>
@@ -13,7 +15,7 @@
                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Kznek1uNVsg" frameborder="0"
                          allowfullscreen></iframe>
              </div>-->
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-6 col-md-offset-3" style="padding-top:100Px">
                 <h2>Start writing your great work today</h2>
 
                 <form role="form">
@@ -23,7 +25,7 @@
                                for="title_name"></label>
 
                         <div ng-class="{'input-group': step ==0 }">
-                            <input id="title_name" class="form-control input-lg" type="text"
+                            <input id="title_name" class="form-control cf-form-control input-lg" type="text"
                                    placeholder="My Amazing Book"
                                    ng-model="title.name">
                                 <span class="input-group-btn" ng-show="step == 0">
@@ -38,7 +40,7 @@
                                for="title_namespace"></label>
 
                         <div><!--ng-class="{'input-group': step ==0 }">-->
-                            <input id="title_namespace" class="form-control" type="text" placeholder="my-amazing-book"
+                            <input id="title_namespace" class="form-control cf-form-control" type="text" placeholder="my-amazing-book"
                                    ng-model="title.namespace" njax-namespace="title_name" tabindex="-1" readonly>
                             <!-- <span class="input-group-btn" ng-show="step == 0">
                                  <button class="btn btn-default" type="button" ng-bind="titleName_action" ng-click="next(1)"></button>
@@ -49,7 +51,7 @@
                         <div class="form-group" ng-class="{ 'has-error': titleDescError }">
                             <label class="control-label" ng-bind="titleDescError || 'Tell us about your book'"
                                    for="title_name"></label>
-                            <textarea class="form-control" rows="3" ng-model="title.desc"></textarea>
+                            <textarea class="form-control cf-form-control" rows="3" ng-model="title.desc"></textarea>
 
 
                         </div>
@@ -61,7 +63,7 @@
                             <label ng-bind="titleChapterLengthError || 'How many chapters do you think your book will be?'"></label>
 
                             <div ng-class="{'input-group': step ==2 }">
-                                <select class="form-control" ng-options="option for option in chapterCountOpts"
+                                <select class="form-control cf-form-control" ng-options="option for option in chapterCountOpts"
                                         ng-model="title.chapterCount">
 
                                 </select>
@@ -95,7 +97,7 @@
                                                             </span>
 
                                                         <input id="chapter_{{chapter.chapterNum}}" type="text"
-                                                               class="form-control" ng-model="chapter.name"/>
+                                                               class="form-control cf-form-control" ng-model="chapter.name"/>
                                                     </div>
                                                 </div>
                                                 <div ng-show='false'> <!--class="col-md-6">-->
@@ -105,7 +107,7 @@
                                                                  <i class="fa fa-bookmark-o"></i>
                                                             </span>
 
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control cf-form-control"
                                                                ng-model="chapter.namespace"
                                                                njax-namespace="chapter_{{chapter.chapterNum}}"/>
                                                     </div>
@@ -146,3 +148,4 @@
         </div>
 
     </div>
+</div>

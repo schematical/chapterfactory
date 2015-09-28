@@ -19,6 +19,9 @@ module.exports = function (grunt) {
 		clean: {
 			build: [
 				'public/_build/*'
+			],
+			js: [
+				'public/_build/js/cfcore*'
 			]
 		},
 		copy: {
@@ -45,7 +48,7 @@ module.exports = function (grunt) {
 		watch: {
 			styles: {
 				files: ['public/less/**/*.less'], // which files to watch
-				tasks: ['less'],
+				tasks: ['less', 'cssmin:local'],
 				options: {
 					nospawn: true
 				}
@@ -53,6 +56,7 @@ module.exports = function (grunt) {
 			js:{
 				files: ['public/js/**/*.js', 'node_modules/njax/public/js/**/*.js'], // which files to watch
 				tasks: [
+					'clean:js',
 					'ngtemplates:local',
 					'angular-builder:local',
 					'concat:local',
