@@ -1,0 +1,25 @@
+
+
+<form role="form" method='POST' enctype="multipart/form-data" ng-submit="save($event);"><!--action='/request_codes/{{ requestCode._id }}'-->
+    
+    
+    <div class="form-group">
+        <label for="code">Code</label>
+        <input name="code" type="code" class="form-control" id="code" placeholder="Enter Code" ng-model="requestCode.code">
+    </div>
+    
+    
+    
+    {{^ application }}
+    <div class="form-group">
+        <label for="application">Application</label>
+        <select id="application" name='application' ng-model="requestCode.application">
+        </select>
+    </div>
+    {{/ application }}
+    
+    
+
+
+    <button type="submit" class="btn btn-default">Save</button>
+</form>

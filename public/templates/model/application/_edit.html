@@ -1,0 +1,164 @@
+
+
+<form role="form" method='POST' enctype="multipart/form-data" ng-submit="save($event);"><!--action='/apps/{{ application._id }}'-->
+    
+    
+    <div class="form-group">
+        <label for="thumb_img">Thumb_img</label>
+        <input type="file" class="form-control" id="thumb_img" name="thumb_img" placeholder="Enter Thumb_img">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="namespace">Namespace</label>
+        <input name="namespace" type="namespace" class="form-control" id="namespace" placeholder="Enter Namespace" ng-model="application.namespace">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input name="name" type="name" class="form-control" id="name" placeholder="Enter Name" ng-model="application.name">
+    </div>
+    
+    
+    
+    <label for="desc">Desc</label>
+    <textarea id="desc" name="desc" class="form-control" rows="3"  ng-model="application.desc">}</textarea>
+    
+    
+    
+    <div class="form-group">
+        <label for="app_url">App_url</label>
+        <input name="app_url" type="app_url" class="form-control" id="app_url" placeholder="Enter App_url" ng-model="application.app_url">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="domain">Domain</label>
+        <input name="domain" type="domain" class="form-control" id="domain" placeholder="Enter Domain" ng-model="application.domain">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="secret">Secret</label>
+        <input name="secret" type="secret" class="form-control" id="secret" placeholder="Enter Secret" ng-model="application.secret">
+    </div>
+    
+    
+    
+    <hr>
+    <div class="form-group">
+        <h4>Level</h4>
+        
+        <div class="radio">
+            <label>
+                <input type="radio" name="level" id="level_SUPER"  ng-model="application.level">
+                super
+            </label>
+        </div>
+        
+        <div class="radio">
+            <label>
+                <input type="radio" name="level" id="level_PARTNER"  ng-model="application.level">
+                partner
+            </label>
+        </div>
+        
+        <div class="radio">
+            <label>
+                <input type="radio" name="level" id="level_UNKNOWN"  ng-model="application.level">
+                unknown
+            </label>
+        </div>
+        
+        <div class="radio">
+            <label>
+                <input type="radio" name="level" id="level_FEATURED"  ng-model="application.level">
+                featured
+            </label>
+        </div>
+        
+        <div class="radio">
+            <label>
+                <input type="radio" name="level" id="level_BETA"  ng-model="application.level">
+                beta
+            </label>
+        </div>
+        
+        <div class="radio">
+            <label>
+                <input type="radio" name="level" id="level_ALPHA"  ng-model="application.level">
+                alpha
+            </label>
+        </div>
+        
+        <div class="radio">
+            <label>
+                <input type="radio" name="level" id="level_LAB"  ng-model="application.level">
+                lab
+            </label>
+        </div>
+        
+        <div class="radio">
+            <label>
+                <input type="radio" name="level" id="level_DEV"  ng-model="application.level">
+                dev
+            </label>
+        </div>
+        
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="callback_url">Callback_url</label>
+        <input name="callback_url" type="callback_url" class="form-control" id="callback_url" placeholder="Enter Callback_url" ng-model="application.callback_url">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="iframes">Iframes</label>
+        <input name="iframes" type="iframes" class="form-control" id="iframes" placeholder="Enter Iframes" ng-model="application.iframes">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="bootstrap_data">Bootstrap_data</label>
+        <input name="bootstrap_data" type="bootstrap_data" class="form-control" id="bootstrap_data" placeholder="Enter Bootstrap_data" ng-model="application.bootstrap_data">
+    </div>
+    
+    
+    
+    {{^ account }}
+    <div class="form-group">
+        <label for="owner">Owner</label>
+        <select id="owner" name='owner' ng-model="application.owner">
+        </select>
+    </div>
+    {{/ account }}
+    
+    
+    
+    <div class="form-group">
+        <label for="widgets">Widgets</label>
+        <input name="widgets" type="widgets" class="form-control" id="widgets" placeholder="Enter Widgets" ng-model="application.widgets">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="auth_url">Auth_url</label>
+        <input name="auth_url" type="auth_url" class="form-control" id="auth_url" placeholder="Enter Auth_url" ng-model="application.auth_url">
+    </div>
+    
+    
+
+
+    <button type="submit" class="btn btn-default">Save</button>
+</form>

@@ -1,0 +1,84 @@
+
+
+<form role="form" method='POST' enctype="multipart/form-data" ng-submit="save($event);"><!--action='/tags/{{ tag._id }}'-->
+    
+    
+    <div class="form-group">
+        <label for="type">Type</label>
+        <input name="type" type="type" class="form-control" id="type" placeholder="Enter Type" ng-model="tag.type">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="sub_type">Sub_type</label>
+        <input name="sub_type" type="sub_type" class="form-control" id="sub_type" placeholder="Enter Sub_type" ng-model="tag.sub_type">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="value">Value</label>
+        <input name="value" type="value" class="form-control" id="value" placeholder="Enter Value" ng-model="tag.value">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="entity_type">Entity_type</label>
+        <input name="entity_type" type="entity_type" class="form-control" id="entity_type" placeholder="Enter Entity_type" ng-model="tag.entity_type">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="entity_url">Entity_url</label>
+        <input name="entity_url" type="entity_url" class="form-control" id="entity_url" placeholder="Enter Entity_url" ng-model="tag.entity_url">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="entity_id">Entity_id</label>
+        <input name="entity_id" type="entity_id" class="form-control" id="entity_id" placeholder="Enter Entity_id" ng-model="tag.entity_id">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="_entity_name">_entity_name</label>
+        <input name="_entity_name" type="_entity_name" class="form-control" id="_entity_name" placeholder="Enter _entity_name" ng-model="tag._entity_name">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="_entity_namespace">_entity_namespace</label>
+        <input name="_entity_namespace" type="_entity_namespace" class="form-control" id="_entity_namespace" placeholder="Enter _entity_namespace" ng-model="tag._entity_namespace">
+    </div>
+    
+    
+    
+    {{^ application }}
+    <div class="form-group">
+        <label for="application">Application</label>
+        <select id="application" name='application' ng-model="tag.application">
+        </select>
+    </div>
+    {{/ application }}
+    
+    
+    
+    {{^ account }}
+    <div class="form-group">
+        <label for="account">Account</label>
+        <select id="account" name='account' ng-model="tag.account">
+        </select>
+    </div>
+    {{/ account }}
+    
+    
+
+
+    <button type="submit" class="btn btn-default">Save</button>
+</form>

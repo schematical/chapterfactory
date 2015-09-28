@@ -1,0 +1,57 @@
+
+
+<form role="form" method='POST' enctype="multipart/form-data" ng-submit="save($event);"><!--action='{{ account.uri }}/title/{{ title._id }}'-->
+    
+    
+    <div class="form-group">
+        <label for="namespace">Namespace</label>
+        <input name="namespace" type="namespace" class="form-control" id="namespace" placeholder="Enter Namespace" ng-model="title.namespace">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input name="name" type="name" class="form-control" id="name" placeholder="Enter Name" ng-model="title.name">
+    </div>
+    
+    
+    
+    <label for="desc">Desc</label>
+    <textarea id="desc" name="desc" class="form-control" rows="3"  ng-model="title.desc"></textarea>
+    
+    
+    
+
+    <div class="form-group" ng-if="!account">
+        <label for="owner">Owner</label>
+        <select id="owner" name='owner' ng-model="title.owner">
+        </select>
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="chapterCount">Chapter Count</label>
+        <input name="chapterCount" type="chapterCount" class="form-control" id="chapterCount" placeholder="Enter Chapter Count" ng-model="title.chapterCount">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="cover">Cover</label>
+        <input type="file" class="form-control" id="cover" name="cover" placeholder="Enter Cover">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="archiveDate">Archive Date</label>
+        <input name="archiveDate" type="archiveDate" class="form-control" id="archiveDate" placeholder="Enter Archive Date" ng-model="title.archiveDate">
+    </div>
+    
+    
+
+
+    <button type="submit" class="btn btn-default">Save</button>
+</form>

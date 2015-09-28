@@ -1,0 +1,62 @@
+<div>
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                {{ title.name }} <small></small>
+            </h1>
+            <njax-breadcrumbs breadcrumbs="breadcrumbs"></njax-breadcrumbs>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="row" ng-if="title">
+        <div class="col-lg-8">
+
+                <title-timeline title="title"></title-timeline>
+
+        </div>
+        <div class="col-lg-4">
+           <div class="row">
+               <share-panel title="title"></share-panel>
+               <div class="panel panel-default" ng-keydown="keyDown($event)">
+                   <div class="panel-heading">
+                       <span ng-if='$parent.loading'>Loading</span>
+                       <span ng-if='!$parent.loading'>Follow</span>
+
+                   </div>
+                   <!-- /.panel-heading -->
+                   <div class="panel-body">
+
+                       <njax-subscription target="title" on-subscribe="onSubscribe($event)">
+                            <a ng-show="!$parent.is_subscribed"href="#" class="btn btn-primary btn-lg btn-block" ng-click="$event.preventDefault()" >
+                                <i class="fa fa-thumbs-up"></i> Follow
+                            </a>
+                           <a ng-show="$parent.is_subscribed" href="#" class="btn btn-danger btn-lg btn-block" ng-click="$event.preventDefault()" >
+                               <i class="fa fa-thumbs-up-o"></i> Unfollow
+                           </a>
+                          <!-- <span ng-if="!$parent.is_subscribed" href="#" ng-click="$event.preventDefault()"><i class="fa fa-thumbs-o-up"></i></span>-->
+
+                       </njax-subscription>
+
+
+                        <h4>Other Followers</h4>
+
+
+                       <njax-subscription-account-list target="title">
+                           <div class="list-group">
+                               <a href="#" class="list-group-item" ng-repeate="account in subscriptions">
+                                   <i class="fa fa-user fa-fw"></i> {{ account.name }}
+                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                    </span>
+                               </a>
+                           </div>
+                       </njax-subscription-account-list>
+                   </div>
+               </div>
+           </div>
+        </div>
+    </div>
+</div>
+
+
+

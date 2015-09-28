@@ -1,0 +1,83 @@
+
+
+<form role="form" method='POST' enctype="multipart/form-data" ng-submit="save($event);"><!--action='{{ title.uri }}/chapter/{{ chapter._id }}'-->
+    
+    
+    <div class="form-group">
+        <label for="namespace">Namespace</label>
+        <input name="namespace" type="namespace" class="form-control" id="namespace" placeholder="Enter Namespace" ng-model="chapter.namespace">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input name="name" type="name" class="form-control" id="name" placeholder="Enter Name" ng-model="chapter.name">
+    </div>
+    
+    
+    
+    <label for="desc">Desc</label>
+    <textarea id="desc" name="desc" class="form-control" rows="3"  ng-model="chapter.desc"></textarea>
+    
+    
+    
+    <div class="form-group">
+        <label for="chapterNum">Chapter Num</label>
+        <input name="chapterNum" type="chapterNum" class="form-control" id="chapterNum" placeholder="Enter Chapter Num" ng-model="chapter.chapterNum">
+    </div>
+    
+    
+    
+    <label for="content">Content</label>
+    <textarea id="content" name="content" class="form-control" rows="3"  ng-model="chapter.content"></textarea>
+    
+    
+    
+    <div class="form-group">
+        <label for="content_html">Content_html</label>
+        <input name="content_html" type="content_html" class="form-control" id="content_html" placeholder="Enter Content_html" ng-model="chapter.content_html">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="startedDate">Started Date</label>
+        <input name="startedDate" type="startedDate" class="form-control" id="startedDate" placeholder="Enter Started Date" ng-model="chapter.startedDate">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="publishedDate">Published Date</label>
+        <input name="publishedDate" type="publishedDate" class="form-control" id="publishedDate" placeholder="Enter Published Date" ng-model="chapter.publishedDate">
+    </div>
+    
+    
+    
+
+    <div class="form-group" ng-if="!title">
+        <label for="title">Title</label>
+        <select id="title" name='title' ng-model="chapter.title">
+        </select>
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="dueDate">Due Date</label>
+        <input name="dueDate" type="dueDate" class="form-control" id="dueDate" placeholder="Enter Due Date" ng-model="chapter.dueDate">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="archiveDate">Archive Date</label>
+        <input name="archiveDate" type="archiveDate" class="form-control" id="archiveDate" placeholder="Enter Archive Date" ng-model="chapter.archiveDate">
+    </div>
+    
+    
+
+
+    <button type="submit" class="btn btn-default">Save</button>
+</form>

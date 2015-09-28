@@ -1,0 +1,74 @@
+
+
+<form role="form" method='POST' enctype="multipart/form-data" ng-submit="save($event);"><!--action='/events/{{ event._id }}'-->
+    
+    
+    <div class="form-group">
+        <label for="event_namespace">Event_namespace</label>
+        <input name="event_namespace" type="event_namespace" class="form-control" id="event_namespace" placeholder="Enter Event_namespace" ng-model="event.event_namespace">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="short_namespace">Short_namespace</label>
+        <input name="short_namespace" type="short_namespace" class="form-control" id="short_namespace" placeholder="Enter Short_namespace" ng-model="event.short_namespace">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="entity_url">Entity_url</label>
+        <input name="entity_url" type="entity_url" class="form-control" id="entity_url" placeholder="Enter Entity_url" ng-model="event.entity_url">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="entity_type">Entity_type</label>
+        <input name="entity_type" type="entity_type" class="form-control" id="entity_type" placeholder="Enter Entity_type" ng-model="event.entity_type">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="entity_id">Entity_id</label>
+        <input name="entity_id" type="entity_id" class="form-control" id="entity_id" placeholder="Enter Entity_id" ng-model="event.entity_id">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="data">Data</label>
+        <input name="data" type="data" class="form-control" id="data" placeholder="Enter Data" ng-model="event.data">
+    </div>
+    
+    
+    
+    {{^ application }}
+    <div class="form-group">
+        <label for="application">Application</label>
+        <select id="application" name='application' ng-model="event.application">
+        </select>
+    </div>
+    {{/ application }}
+    
+    
+    
+    <div class="form-group">
+        <label for="accounts">Accounts</label>
+        <input name="accounts" type="accounts" class="form-control" id="accounts" placeholder="Enter Accounts" ng-model="event.accounts">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="mutedDate">Muted Date</label>
+        <input name="mutedDate" type="mutedDate" class="form-control" id="mutedDate" placeholder="Enter Muted Date" ng-model="event.mutedDate">
+    </div>
+    
+    
+
+
+    <button type="submit" class="btn btn-default">Save</button>
+</form>

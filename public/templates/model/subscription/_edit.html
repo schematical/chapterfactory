@@ -1,0 +1,91 @@
+
+
+<form role="form" method='POST' enctype="multipart/form-data" ng-submit="save($event);"><!--action='{{ account.uri }}/subscriptions/{{ subscription._id }}'-->
+    
+    
+    <div class="form-group">
+        <label for="event_filters">Event_filters</label>
+        <input name="event_filters" type="event_filters" class="form-control" id="event_filters" placeholder="Enter Event_filters" ng-model="subscription.event_filters">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="short_namespace">Short_namespace</label>
+        <input name="short_namespace" type="short_namespace" class="form-control" id="short_namespace" placeholder="Enter Short_namespace" ng-model="subscription.short_namespace">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="type">Type</label>
+        <input name="type" type="type" class="form-control" id="type" placeholder="Enter Type" ng-model="subscription.type">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="entity_url">Entity_url</label>
+        <input name="entity_url" type="entity_url" class="form-control" id="entity_url" placeholder="Enter Entity_url" ng-model="subscription.entity_url">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="entity_type">Entity_type</label>
+        <input name="entity_type" type="entity_type" class="form-control" id="entity_type" placeholder="Enter Entity_type" ng-model="subscription.entity_type">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="entity_id">Entity_id</label>
+        <input name="entity_id" type="entity_id" class="form-control" id="entity_id" placeholder="Enter Entity_id" ng-model="subscription.entity_id">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="data">Data</label>
+        <input name="data" type="data" class="form-control" id="data" placeholder="Enter Data" ng-model="subscription.data">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="_entity_name">_entity_name</label>
+        <input name="_entity_name" type="_entity_name" class="form-control" id="_entity_name" placeholder="Enter _entity_name" ng-model="subscription._entity_name">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="_entity_namespace">_entity_namespace</label>
+        <input name="_entity_namespace" type="_entity_namespace" class="form-control" id="_entity_namespace" placeholder="Enter _entity_namespace" ng-model="subscription._entity_namespace">
+    </div>
+    
+    
+    
+    {{^ application }}
+    <div class="form-group">
+        <label for="application">Application</label>
+        <select id="application" name='application' ng-model="subscription.application">
+        </select>
+    </div>
+    {{/ application }}
+    
+    
+    
+    {{^ account }}
+    <div class="form-group">
+        <label for="account">Account</label>
+        <select id="account" name='account' ng-model="subscription.account">
+        </select>
+    </div>
+    {{/ account }}
+    
+    
+
+
+    <button type="submit" class="btn btn-default">Save</button>
+</form>

@@ -1,0 +1,48 @@
+
+
+<form role="form" method='POST' enctype="multipart/form-data" ng-submit="save($event);"><!--action='/accounts/{{ account._id }}'-->
+    
+    
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input name="email" type="email" class="form-control" id="email" placeholder="Enter Email" ng-model="account.email">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input name="name" type="name" class="form-control" id="name" placeholder="Enter Name" ng-model="account.name">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="namespace">Namespace</label>
+        <input name="namespace" type="namespace" class="form-control" id="namespace" placeholder="Enter Namespace" ng-model="account.namespace">
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label for="active">
+                    <input name="active" type="checkbox"  id="active" ng-model="account.active" />
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label for="forgot_pass_code">Forgot_pass_code</label>
+        <input name="forgot_pass_code" type="forgot_pass_code" class="form-control" id="forgot_pass_code" placeholder="Enter Forgot_pass_code" ng-model="account.forgot_pass_code">
+    </div>
+    
+    
+
+
+    <button type="submit" class="btn btn-default">Save</button>
+</form>
