@@ -50,7 +50,17 @@ cfcore.config(
 				white_list
 			);
 			//$http.defaults.withCredentials = true;
-
+			$stateProvider.state('faq', {
+				url: '/faq',
+				views: {
+					body: {
+						templateUrl: '/templates/faq.html',
+						controller: function ($scope) {
+							console.log("FAQ Hit");
+						}
+					}
+				}
+			});
 
 			NJax.Builder.buildRoutes($urlRouterProvider, $stateProvider);
 
@@ -337,7 +347,7 @@ console.log($("#register").offset().top);
 				templateUrl: '/templates/directives/cfSidebar.html',
 				link: function (scope, element, attrs) {
 
-
+					scope.user = NJaxBootstrap.user;
 				}
 			}
 		}

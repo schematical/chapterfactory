@@ -201,7 +201,7 @@
             <!-- /.dropdown-alerts -->
         </li>
         <!-- /.dropdown -->
-        <li class="dropdown">
+        <li ng-if="user" class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
@@ -240,6 +240,9 @@
                 </li>
                 <li>
                     <a href="/discover">Discover</a>
+                </li>
+                <li>
+                    <a href="/faq">FAQ</a>
                 </li>
                <!-- <li>
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
